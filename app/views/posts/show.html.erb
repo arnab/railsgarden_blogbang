@@ -1,6 +1,17 @@
 <h1> <%= @post.title %> </h1>
 <p> <%= @post.content %> </p>
-<%= form_for [@post, @comment] do |f| %>
+
+<ul>
+    <% @comments.each do |comment| %>
+    <li>
+      <div>From <%= comment.name %> (<%= comment.email %>)</div>
+      <p> <%= comment.content %> </p>
+    </li>
+    <% end %>
+
+<% comment = @post.comments.build %>
+
+<%= form_for [@post, comment] do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br/>
